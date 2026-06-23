@@ -22,26 +22,36 @@
             border-bottom-width: 3px;
         }
         
+        /* Responsive Line Gradients to match scaling font size */
         #text-display {
-            line-height: 3.2rem;
+            line-height: 2.6rem;
             background-image: repeating-linear-gradient(
                 transparent,
-                transparent 3.1rem,
-                rgba(51, 65, 85, 0.3) 3.1rem,
-                rgba(51, 65, 85, 0.3) 3.2rem
+                transparent 2.5rem,
+                rgba(51, 65, 85, 0.3) 2.5rem,
+                rgba(51, 65, 85, 0.3) 2.6rem
             );
+        }
+        @media (min-width: 640px) {
+            #text-display {
+                line-height: 3.2rem;
+                background-image: repeating-linear-gradient(
+                    transparent,
+                    transparent 3.1rem,
+                    rgba(51, 65, 85, 0.3) 3.1rem,
+                    rgba(51, 65, 85, 0.3) 3.2rem
+                );
+            }
         }
 
         /* --- HEAVY INTERACTION ANIMATIONS --- */
         
-        /* The physical pop of a correct keystroke */
         @keyframes typePop {
             0% { transform: scale(1); filter: brightness(1); }
             40% { transform: scale(1.18) translateY(-2px); filter: brightness(1.4); }
             100% { transform: scale(1) translateY(0); filter: brightness(1); }
         }
 
-        /* The violent shake of an error */
         @keyframes errorShake {
             0%, 100% { transform: translateX(0); }
             20% { transform: translateX(-5px) rotate(-4deg); }
@@ -50,56 +60,47 @@
             80% { transform: translateX(3px) rotate(2deg); }
         }
 
-        /* Smoothly sliding finished lines away */
         @keyframes slideUpFade {
             0% { opacity: 1; transform: translateY(0); }
             100% { opacity: 0; transform: translateY(-15px) scale(0.98); }
         }
 
-        /* The glassmorphism start reveal */
         @keyframes blurFadeOut {
             0% { opacity: 1; transform: scale(1); }
             100% { opacity: 0; transform: scale(1.03); visibility: hidden; }
         }
 
-        /* The subtle breathing glow while typing */
         @keyframes pulseGlow {
             0%, 100% { box-shadow: 0 0 0px 0px rgba(99, 102, 241, 0); border-color: rgba(99, 102, 241, 0.3); }
             50% { box-shadow: 0 0 30px 0px rgba(99, 102, 241, 0.15); border-color: rgba(99, 102, 241, 0.6); }
         }
 
-        /* Subtle pop for metrics changing */
         @keyframes metricPop {
             0% { transform: scale(1); filter: brightness(1); }
             30% { transform: scale(1.15); filter: brightness(1.4); text-shadow: 0 0 12px currentColor; }
             100% { transform: scale(1); filter: brightness(1); text-shadow: none; }
         }
 
-        /* Minimal tick for frequent updates (WPM, Time) */
         @keyframes metricSubtle {
             0% { transform: scale(1); filter: brightness(1); }
             30% { transform: scale(1.04); filter: brightness(1.2); }
             100% { transform: scale(1); filter: brightness(1); }
         }
 
-        /* Cinematic Achievement Screen */
         @keyframes dramaticPop {
             0% { opacity: 0; transform: scale(0.92) translateY(30px); filter: blur(8px); }
             100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
         }
 
-        /* Cascading error cards */
         @keyframes staggerCard {
             0% { opacity: 0; transform: translateY(20px) scale(0.9); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* View transition */
         .view-enter {
             animation: dramaticPop 0.6s var(--ease-heavy) forwards;
         }
 
-        /* Upgraded Error Tooltip */
         .char[data-error]::after {
             content: attr(data-error);
             position: absolute;
@@ -125,7 +126,6 @@
             100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
         }
         
-        /* Subtle float for start button */
         @keyframes floatIdle {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-4px); }
@@ -133,21 +133,22 @@
         .float-anim { animation: floatIdle 3s ease-in-out infinite; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-200 font-sans selection:bg-indigo-500/30 min-h-screen flex items-center justify-center p-4 overflow-x-hidden">
+<body class="bg-slate-950 text-slate-200 font-sans selection:bg-indigo-500/30 min-h-screen flex flex-col items-center justify-start sm:justify-center p-3 sm:p-4 overflow-x-hidden pt-6 sm:pt-4">
 
-    <div class="max-w-4xl w-full flex flex-col gap-8">
+    <div class="max-w-4xl w-full flex flex-col gap-6 sm:gap-8">
         
-        <!-- Header -->
-        <header class="flex justify-between items-center pb-6 border-b border-slate-800/80">
-            <div class="flex items-center gap-3 text-indigo-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2" ry="2"/><path d="M6 8h.001"/><path d="M10 8h.001"/><path d="M14 8h.001"/><path d="M18 8h.001"/><path d="M8 12h.001"/><path d="M12 12h.001"/><path d="M16 12h.001"/><path d="M7 16h10"/></svg>
-                <h1 class="text-2xl font-bold tracking-tight text-slate-100">TypeFlow</h1>
+        <!-- Header (FULLY RESPONSIVE) -->
+        <header class="flex flex-col md:flex-row justify-between items-center pb-4 sm:pb-6 border-b border-slate-800/80 gap-4 sm:gap-6">
+            <div class="flex items-center w-full md:w-auto justify-center md:justify-start">
+                <div class="flex items-center gap-2 sm:gap-3 text-indigo-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sm:w-8 sm:h-8"><rect width="20" height="16" x="2" y="4" rx="2" ry="2"/><path d="M6 8h.001"/><path d="M10 8h.001"/><path d="M14 8h.001"/><path d="M18 8h.001"/><path d="M8 12h.001"/><path d="M12 12h.001"/><path d="M16 12h.001"/><path d="M7 16h10"/></svg>
+                    <h1 class="text-2xl font-bold tracking-tight text-slate-100">TypeFlow</h1>
+                </div>
             </div>
             
-            <!-- Navigation -->
-            <div class="flex gap-4">
-                <div class="relative hidden sm:block">
-                    <select id="level-selector" class="appearance-none bg-slate-900 border border-slate-700 text-slate-300 rounded-lg pl-4 pr-10 py-2 font-medium focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 cursor-pointer text-sm shadow-sm transition-all hover:border-slate-500 hover:bg-slate-800">
+            <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-4 w-full md:w-auto">
+                <div class="relative w-full sm:w-auto flex-shrink-0">
+                    <select id="level-selector" class="w-full sm:w-auto appearance-none bg-slate-900 border border-slate-700 text-slate-300 rounded-lg pl-3 pr-10 py-2.5 sm:pl-4 sm:py-2 font-medium focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 cursor-pointer text-sm shadow-sm transition-all hover:border-slate-500 hover:bg-slate-800">
                         <option value="0">Level 1: SQL Basics</option>
                         <option value="1">Level 2: Python / Pandas</option>
                         <option value="2">Level 3: JSON Configs</option>
@@ -160,63 +161,67 @@
                     </div>
                 </div>
 
-                <button type="button" id="btn-sound-toggle" class="flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800" title="Toggle Sound">
+                <button type="button" id="btn-sound-toggle" class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800" title="Toggle Sound">
                     <svg id="icon-sound-on" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
                     <svg id="icon-sound-off" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
                 </button>
-                <button type="button" id="nav-practice" class="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/20">
+                <button type="button" id="nav-practice" class="flex-1 sm:flex-none flex justify-center items-center gap-2 px-3 sm:px-4 py-2 sm:py-2 rounded-lg font-medium transition-all bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/20 text-sm sm:text-base">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                     Practice
                 </button>
-                <button type="button" id="nav-custom" class="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800" title="Shortcut: Space">
+                <button type="button" id="nav-custom" class="flex-1 sm:flex-none flex justify-center items-center gap-2 px-3 sm:px-4 py-2 sm:py-2 rounded-lg font-medium transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800 text-sm sm:text-base" title="Shortcut: Space">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13.5V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-5.5"/><polyline points="14 2 14 8 20 8"/><path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z"/></svg>
-                    Custom Text <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 text-slate-400 rounded text-[0.65rem] ml-1 font-mono shadow-sm">Space</kbd>
+                    Custom Text <kbd class="hidden sm:inline-block px-1.5 py-0.5 bg-slate-800 border border-slate-700 text-slate-400 rounded text-[0.65rem] ml-1 font-mono shadow-sm">Space</kbd>
                 </button>
             </div>
         </header>
 
         <!-- Custom Text View -->
-        <div id="view-custom" class="hidden bg-slate-900 rounded-2xl p-8 border border-slate-800 shadow-2xl">
-            <h2 class="text-xl font-semibold mb-4 text-slate-100">Paste your custom text</h2>
-            <p class="text-slate-400 mb-6 text-sm">Create your own practice session by pasting scripts, JSON, or complex queries.</p>
+        <div id="view-custom" class="hidden bg-slate-900 rounded-2xl p-5 sm:p-8 border border-slate-800 shadow-2xl">
+            <h2 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-slate-100">Paste your custom text</h2>
+            <p class="text-slate-400 mb-4 sm:mb-6 text-xs sm:text-sm">Create your own practice session by pasting scripts, JSON, or complex queries.</p>
             
-            <textarea id="custom-input-area" class="w-full h-64 bg-slate-950 border border-slate-700 rounded-xl p-4 text-slate-300 font-mono text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none transition-all shadow-inner" placeholder="Paste text here..."></textarea>
+            <textarea id="custom-input-area" class="w-full h-48 sm:h-64 bg-slate-950 border border-slate-700 rounded-xl p-3 sm:p-4 text-slate-300 font-mono text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none transition-all shadow-inner" placeholder="Paste text here..."></textarea>
             
-            <div class="flex justify-end mt-6 gap-4">
-                <button type="button" id="btn-cancel-custom" class="px-6 py-2 rounded-lg font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors">Cancel</button>
-                <button type="button" id="btn-apply-custom" class="px-6 py-2 rounded-lg font-medium bg-indigo-600 hover:bg-indigo-500 text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-indigo-500/20">Apply & Start Typing</button>
+            <div class="flex justify-end mt-5 sm:mt-6 gap-3 sm:gap-4">
+                <button type="button" id="btn-cancel-custom" class="px-4 sm:px-6 py-2 rounded-lg font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors text-sm sm:text-base">Cancel</button>
+                <button type="button" id="btn-apply-custom" class="px-4 sm:px-6 py-2 rounded-lg font-medium bg-indigo-600 hover:bg-indigo-500 text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-indigo-500/20 text-sm sm:text-base">Apply & Start</button>
             </div>
         </div>
 
         <!-- Practice View -->
-        <div id="view-practice" class="flex flex-col gap-6 view-enter">
+        <div id="view-practice" class="flex flex-col gap-4 sm:gap-6 view-enter w-full">
             
             <!-- Real-time Metrics Dashboard -->
-            <div class="flex gap-4 mb-2">
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex-1 flex flex-col items-center justify-center shadow-lg backdrop-blur-md transition-all hover:border-slate-700">
-                    <span class="text-slate-500 text-sm font-semibold flex items-center gap-1 uppercase tracking-wider mb-1">WPM</span>
-                    <span id="display-wpm" class="text-4xl font-bold text-indigo-400 inline-block origin-center">0</span>
+            <div class="flex gap-2 sm:gap-4 mb-1 sm:mb-2 w-full">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 sm:p-4 flex-1 flex flex-col items-center justify-center shadow-lg backdrop-blur-md transition-all hover:border-slate-700">
+                    <span class="text-slate-500 text-[0.65rem] sm:text-sm font-semibold flex items-center gap-1 uppercase tracking-wider mb-1">WPM</span>
+                    <span id="display-wpm" class="text-2xl sm:text-4xl font-bold text-indigo-400 inline-block origin-center">0</span>
                 </div>
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex-1 flex flex-col items-center justify-center shadow-lg backdrop-blur-md transition-all hover:border-slate-700">
-                    <span class="text-slate-500 text-sm font-semibold flex items-center gap-1 uppercase tracking-wider mb-1">Accuracy</span>
-                    <span id="display-acc" class="text-4xl font-bold text-emerald-400 inline-block origin-center">100%</span>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 sm:p-4 flex-1 flex flex-col items-center justify-center shadow-lg backdrop-blur-md transition-all hover:border-slate-700">
+                    <span class="text-slate-500 text-[0.65rem] sm:text-sm font-semibold flex items-center gap-1 uppercase tracking-wider mb-1">Accuracy</span>
+                    <span id="display-acc" class="text-2xl sm:text-4xl font-bold text-emerald-400 inline-block origin-center">100%</span>
                 </div>
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex-1 flex flex-col items-center justify-center shadow-lg backdrop-blur-md transition-all hover:border-slate-700">
-                    <span class="text-slate-500 text-sm font-semibold flex items-center gap-1 uppercase tracking-wider mb-1">Time</span>
-                    <span id="display-time" class="text-4xl font-bold text-slate-200 inline-block origin-center">0s</span>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 sm:p-4 flex-1 flex flex-col items-center justify-center shadow-lg backdrop-blur-md transition-all hover:border-slate-700">
+                    <span class="text-slate-500 text-[0.65rem] sm:text-sm font-semibold flex items-center gap-1 uppercase tracking-wider mb-1">Time</span>
+                    <span id="display-time" class="text-2xl sm:text-4xl font-bold text-slate-200 inline-block origin-center">0s</span>
                 </div>
             </div>
 
             <!-- Typing Canvas Container -->
-            <div id="typing-container" class="relative bg-slate-900 border-[3px] border-slate-800 rounded-2xl p-8 text-2xl leading-relaxed font-mono tracking-wide transition-all duration-500 shadow-2xl overflow-hidden min-h-[420px] flex items-start">
+            <div id="typing-container" class="relative bg-slate-900 border-[3px] border-slate-800 rounded-2xl p-4 sm:p-8 text-xl sm:text-2xl leading-relaxed font-mono tracking-wide transition-all duration-500 shadow-2xl overflow-hidden min-h-[300px] sm:min-h-[420px] flex items-start w-full">
                 
                 <textarea id="hidden-type-input" class="absolute inset-0 w-full h-full opacity-0 z-20 cursor-text resize-none overflow-hidden" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
 
-                <!-- Status Overlay when Idle -->
+                <!-- Status Overlay when Idle (Touch support included) -->
                 <div id="overlay-idle" class="absolute inset-0 flex items-center justify-center bg-slate-900/20 z-30 pointer-events-none rounded-2xl">
-                    <span class="float-anim bg-slate-800/90 text-slate-200 px-6 py-4 rounded-2xl font-sans text-sm font-medium border border-slate-700/80 shadow-2xl shadow-indigo-500/10 flex items-center gap-3 backdrop-blur-md">
-                        <svg class="text-indigo-400" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                        <span class="text-[0.95rem]">Press <kbd class="px-2.5 py-1 mx-1.5 bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 rounded-md font-mono font-bold shadow-sm">Enter ↵</kbd> to reveal text</span>
+                    <span class="float-anim bg-slate-800/90 text-slate-200 px-5 sm:px-6 py-3 sm:py-4 rounded-2xl font-sans text-xs sm:text-sm font-medium border border-slate-700/80 shadow-2xl shadow-indigo-500/10 flex items-center gap-2 sm:gap-3 backdrop-blur-md text-center flex-wrap justify-center">
+                        <svg class="text-indigo-400 hidden sm:block" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                        <span class="text-[0.85rem] sm:text-[0.95rem]">
+                            Press <kbd class="hidden sm:inline-block px-2.5 py-1 mx-1.5 bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 rounded-md font-mono font-bold shadow-sm">Enter ↵</kbd>
+                            <span class="sm:hidden font-bold text-indigo-300 mx-1 border border-indigo-500/40 bg-indigo-500/20 px-2 py-0.5 rounded-md">Tap</span> 
+                            to reveal text
+                        </span>
                     </span>
                 </div>
 
@@ -240,10 +245,10 @@
             </div>
 
             <!-- Footer Controls -->
-            <div class="flex justify-center mt-4">
+            <div class="flex justify-center mt-2 sm:mt-4 mb-4">
                 <button type="button" id="btn-restart" class="group flex items-center gap-2 text-slate-500 hover:text-slate-200 transition-colors font-medium text-sm px-5 py-2.5 rounded-xl hover:bg-slate-800 border border-transparent hover:border-slate-700 shadow-sm" title="Shortcut: Enter">
                     <svg class="group-hover:-rotate-180 transition-transform duration-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-                    Restart Test <kbd class="px-1.5 py-0.5 bg-slate-900 border border-slate-700 text-slate-500 group-hover:text-slate-300 rounded text-[0.65rem] ml-1.5 font-mono shadow-sm transition-colors">↵ Enter</kbd>
+                    Restart Test <kbd class="hidden sm:inline-block px-1.5 py-0.5 bg-slate-900 border border-slate-700 text-slate-500 group-hover:text-slate-300 rounded text-[0.65rem] ml-1.5 font-mono shadow-sm transition-colors">↵ Enter</kbd>
                 </button>
             </div>
             
@@ -399,6 +404,23 @@
         const customTextarea = document.getElementById('custom-input-area');
         const levelSelector = document.getElementById('level-selector');
         
+        // --- SHARED REVEAL LOGIC ---
+        function revealText(clearInput = true) {
+            if (status !== 'hidden') return;
+            status = 'idle'; 
+            if(clearInput) {
+                elInput.value = '';
+            }
+            elOverlayIdle.style.animation = 'blurFadeOut 0.5s var(--ease-heavy) forwards';
+            
+            elTextDisplay.style.transition = 'filter 0.8s var(--ease-out-expo), opacity 0.8s var(--ease-out-expo)';
+            elTextDisplay.style.filter = 'blur(0px)';
+            elTextDisplay.style.opacity = '1';
+            
+            SoundManager.playKey(' '); 
+            elInput.focus();
+        }
+
         function init() {
             levelSelector.value = currentSlotIndex;
             buildDOM();
@@ -412,6 +434,15 @@
             };
             document.addEventListener('keydown', initAudio);
             document.addEventListener('click', initAudio);
+
+            // Setup Touch & Clicks on the container to start cleanly on Mobile
+            elTypingContainer.addEventListener('click', () => {
+                if (status === 'hidden') {
+                    revealText(true);
+                } else if(status !== 'finished') {
+                    elInput.focus();
+                }
+            });
 
             document.addEventListener('keydown', (e) => {
                 if (!viewCustom.classList.contains('hidden')) return;
@@ -428,17 +459,7 @@
                         resetTest();
                     } else if (status === 'hidden') {
                         e.preventDefault(); 
-                        status = 'idle'; 
-                        elInput.value = '';
-                        elOverlayIdle.style.animation = 'blurFadeOut 0.5s var(--ease-heavy) forwards';
-                        
-                        // --- UNBLUR TEXT ANIMATION ---
-                        elTextDisplay.style.transition = 'filter 0.8s var(--ease-out-expo), opacity 0.8s var(--ease-out-expo)';
-                        elTextDisplay.style.filter = 'blur(0px)';
-                        elTextDisplay.style.opacity = '1';
-                        
-                        SoundManager.playKey(' '); 
-                        elInput.focus();
+                        revealText(true);
                     }
                 }
             });
@@ -466,9 +487,6 @@
             document.getElementById('btn-cancel-custom').addEventListener('click', () => switchMode('practice'));
             document.getElementById('btn-apply-custom').addEventListener('click', applyCustomText);
 
-            elTypingContainer.addEventListener('click', () => {
-                if(status !== 'finished') elInput.focus();
-            });
             customTextarea.addEventListener('input', () => {
                 document.getElementById('btn-apply-custom').disabled = !customTextarea.value.trim();
             });
@@ -486,8 +504,6 @@
                 currentSlotIndex = 5;
                 levelSelector.value = "5"; 
                 
-                // Defensive try/catch to prevent the browser from halting JS execution 
-                // if local storage is disabled by security settings
                 try {
                     localStorage.setItem('typeflow_de_slots_v1', JSON.stringify(textSlots));
                 } catch (e) {
@@ -508,25 +524,11 @@
 
             if (status === 'hidden') {
                 if (val.includes('\n')) {
-                    status = 'idle'; 
-                    elInput.value = ''; 
-                    elOverlayIdle.style.animation = 'blurFadeOut 0.5s var(--ease-heavy) forwards';
-                    
-                    // --- UNBLUR TEXT ANIMATION ---
-                    elTextDisplay.style.transition = 'filter 0.8s var(--ease-out-expo), opacity 0.8s var(--ease-out-expo)';
-                    elTextDisplay.style.filter = 'blur(0px)';
-                    elTextDisplay.style.opacity = '1';
-                        
-                    SoundManager.playKey(' '); 
+                    revealText(true);
                     return;
                 } else if (val.length > 0 && val[0] === targetText[0]) {
-                    status = 'idle'; 
-                    elOverlayIdle.style.animation = 'blurFadeOut 0.5s var(--ease-heavy) forwards';
-                    
-                    // --- UNBLUR TEXT ANIMATION ---
-                    elTextDisplay.style.transition = 'filter 0.8s var(--ease-out-expo), opacity 0.8s var(--ease-out-expo)';
-                    elTextDisplay.style.filter = 'blur(0px)';
-                    elTextDisplay.style.opacity = '1';
+                    // Passed actual correct char, so do NOT clear input
+                    revealText(false);
                 } else if (val.length > 0) {
                     elInput.value = '';
                     SoundManager.playError();
@@ -642,7 +644,8 @@
                     let attrChar = char === '\n' ? '&#10;' : escapeHTML(char);
                     let safeDisplayChar = escapeHTML(displayChar);
 
-                    html += `<span id="char-${globalIndex}" data-char="${attrChar}" class="char relative font-mono text-[1.4rem] tracking-wide px-[1px] rounded-[3px] text-slate-500 border-b-[3px] border-transparent transition-colors duration-150${extraClass}">${safeDisplayChar}</span>`;
+                    // Changed CSS class text to scale appropriately on Mobile
+                    html += `<span id="char-${globalIndex}" data-char="${attrChar}" class="char relative font-mono text-[1.1rem] sm:text-[1.4rem] tracking-wide px-[1px] rounded-[3px] text-slate-500 border-b-[3px] border-transparent transition-colors duration-150${extraClass}">${safeDisplayChar}</span>`;
                     globalIndex++;
                 }
                 html += `</div>`;
@@ -692,15 +695,13 @@
                     el.removeAttribute('data-error');
                 }
 
-                // Preserve the inline transform/animations applied by the handler, only modify color classes safely
-                el.className = `char relative font-mono text-[1.4rem] tracking-wide px-[1px] rounded-[3px] transition-colors duration-150 border-b-[3px] ${colorClass} ${bgClass} ${cursorClass}`;
+                el.className = `char relative font-mono text-[1.1rem] sm:text-[1.4rem] tracking-wide px-[1px] rounded-[3px] transition-colors duration-150 border-b-[3px] ${colorClass} ${bgClass} ${cursorClass}`;
             }
 
             if (status !== 'finished') {
                 let words = Array.from(document.querySelectorAll('.word'));
                 let brs = Array.from(document.querySelectorAll('.word-break'));
                 
-                // Only reset non-hidden items to prevent reflow breaks
                 words.forEach(word => { if(!word.dataset.hidden) word.style.display = 'inline-block'; });
                 brs.forEach(br => { if(!br.dataset.hidden) br.style.display = 'inline'; });
 
@@ -713,7 +714,6 @@
                         let activeOffset = activeWord ? activeWord.offsetTop : activeCharEl.offsetTop;
                         let wordOffsets = words.map(word => word.offsetTop);
                         
-                        // --- SMOOTH LINE HIDING ANIMATION ---
                         words.forEach((word, index) => {
                             if (wordOffsets[index] < activeOffset - 15) {
                                 if (!word.dataset.hidden) {
@@ -736,19 +736,15 @@
 
         function updateMetrics() {
             let acc = 100;
-            // Keystroke Precision Accuracy
             let totalTyped = inputText.length + totalErrors;
             if (totalTyped > 0) acc = Math.round((inputText.length / totalTyped) * 100);
 
             let wpm = 0;
             let minutes = timeElapsed / 60;
-            // Net WPM Calculation
             if (minutes > 0) wpm = Math.round((inputText.length / 5) / minutes);
 
-            // Clean Time Formatting (converts 65s into 1m 5s)
             let timeStr = timeElapsed < 60 ? timeElapsed + "s" : Math.floor(timeElapsed / 60) + "m " + (timeElapsed % 60) + "s";
 
-            // Animate only on specific value changes
             if (wpm !== lastWpm) {
                 animateMetric(elWpm, wpm, 'metricSubtle 0.2s var(--ease-out-expo) forwards');
                 lastWpm = wpm;
@@ -768,14 +764,14 @@
         function animateMetric(el, val, animationStyle) {
             el.innerText = val;
             el.style.animation = 'none';
-            el.offsetHeight; // trigger hardware reflow
+            el.offsetHeight; 
             el.style.animation = animationStyle;
         }
 
         function endTest() {
             status = 'finished';
             clearInterval(timer);
-            elTypingContainer.style.animation = 'none'; // Stop breathing
+            elTypingContainer.style.animation = 'none'; 
             
             SoundManager.playSuccess(); 
             updateDOMClasses(); 
@@ -785,7 +781,6 @@
             let feedbackEl = document.getElementById('error-feedback');
             let errorEntries = Object.entries(errorTracker);
             
-            // --- CINEMATIC ACHIEVEMENT POP-IN ---
             elOverlayFinished.classList.remove('hidden');
             let finishContent = document.getElementById('finish-content');
             finishContent.style.animation = 'none';
@@ -805,11 +800,10 @@
                 let paddingClass = errorCount < 3 ? 'py-4' : 'py-2 sm:py-3';
                 let textSizeClass = errorCount < 3 ? 'text-3xl' : 'text-xl sm:text-2xl';
 
-                // --- STAGGERED CASCADING CARDS ---
                 let cardsHtml = topErrors.map((entry, idx) => {
                     let keyDisplay = entry[0] === ' ' ? 'Space' : entry[0] === '\n' ? 'Enter' : entry[0];
                     let misses = entry[1];
-                    let delay = 0.3 + (idx * 0.1); // Stagger animation delay
+                    let delay = 0.3 + (idx * 0.1); 
                     
                     return `
                         <div style="animation: staggerCard 0.5s var(--ease-out-expo) ${delay}s both;" class="group flex flex-col items-center justify-center bg-slate-950/60 border border-slate-700/80 px-4 ${paddingClass} rounded-xl shadow-md hover:border-rose-500/50 hover:shadow-rose-500/20 hover:-translate-y-1 transition-all duration-300">
@@ -868,10 +862,9 @@
             updateMetrics();
             
             elOverlayIdle.classList.remove('hidden');
-            elOverlayIdle.style.animation = 'none'; // reset idle reveal
+            elOverlayIdle.style.animation = 'none'; 
             elOverlayFinished.classList.add('hidden');
             
-            // --- INSTANTLY RE-BLUR TEXT ---
             elTextDisplay.style.transition = 'none';
             elTextDisplay.style.filter = 'blur(7px)';
             elTextDisplay.style.opacity = '0.4';
@@ -890,7 +883,6 @@
             oldView.classList.remove('view-enter');
             
             targetView.classList.remove('hidden');
-            // Re-trigger the enter animation
             targetView.style.animation = 'none';
             targetView.offsetHeight;
             targetView.style.animation = '';
